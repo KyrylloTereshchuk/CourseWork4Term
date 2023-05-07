@@ -1,0 +1,74 @@
+﻿@model WebApplication1.Models.vPlanLine
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>vPlanLine</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ReservedShipment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReservedShipment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShipmentBuyersOrders)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShipmentBuyersOrders)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Production)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Production)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstimatedStockBalance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstimatedStockBalance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AvailablePromise)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AvailablePromise)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.C_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.C_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cProductType.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cProductType.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

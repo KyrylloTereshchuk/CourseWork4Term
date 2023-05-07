@@ -1,0 +1,80 @@
+﻿@model WebApplication1.Models.vPlanLine
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>vPlanLine</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ReservedShipment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReservedShipment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShipmentBuyersOrders)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShipmentBuyersOrders)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Production)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Production)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstimatedStockBalance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstimatedStockBalance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AvailablePromise)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AvailablePromise)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.C_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.C_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cProductType.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cProductType.Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

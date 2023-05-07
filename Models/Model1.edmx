@@ -1,0 +1,512 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cLine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Number" Type="int" />
+          <Property Name="OrderId" Type="int" />
+          <Property Name="ProductTypeId" Type="int" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Курсова робота.dbo.cLineCopy" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="cLineCopy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Number" Type="int" />
+          <Property Name="OrderId" Type="int" />
+          <Property Name="ProductTypeId" Type="int" />
+        </EntityType>
+        <EntityType Name="cProductType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="char" MaxLength="50" />
+          <Property Name="Price" Type="money" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Курсова робота.dbo.cProductTypeCopy" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="cProductTypeCopy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="char" MaxLength="50" />
+          <Property Name="Price" Type="money" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="vOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Buyer" Type="char" MaxLength="50" />
+          <Property Name="ShipmentDate" Type="date" />
+        </EntityType>
+        <EntityType Name="vPlanLine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ReservedShipment" Type="int" />
+          <Property Name="ShipmentBuyersOrders" Type="int" />
+          <Property Name="Production" Type="int" />
+          <Property Name="EstimatedStockBalance" Type="int" />
+          <Property Name="AvailablePromise" Type="int" />
+          <Property Name="_Date" Type="date" />
+          <Property Name="ProductTypeId" Type="int" />
+        </EntityType>
+        <EntityType Name="vPlanLineCopy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ReservedShipment" Type="int" />
+          <Property Name="ShipmentBuyersOrders" Type="int" />
+          <Property Name="Production" Type="int" />
+          <Property Name="EstimatedStockBalance" Type="int" />
+          <Property Name="AvailablePromise" Type="int" />
+          <Property Name="_Date" Type="date" />
+          <Property Name="ProductTypeId" Type="int" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Курсова робота.dbo.vPlanLineCopy2" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="vPlanLineCopy2">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ReservedShipment" Type="int" />
+          <Property Name="ShipmentBuyersOrders" Type="int" />
+          <Property Name="Production" Type="int" />
+          <Property Name="EstimatedStockBalance" Type="int" />
+          <Property Name="AvailablePromise" Type="int" />
+          <Property Name="_Date" Type="date" />
+          <Property Name="ProductTypeId" Type="int" />
+        </EntityType>
+        <Association Name="FK__cLine__OrderId__0D7A0286">
+          <End Role="vOrder" Type="Self.vOrder" Multiplicity="0..1" />
+          <End Role="cLine" Type="Self.cLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vOrder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="cLine">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cLine__ProductTy__0E6E26BF">
+          <End Role="cProductType" Type="Self.cProductType" Multiplicity="0..1" />
+          <End Role="cLine" Type="Self.cLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cProductType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="cLine">
+              <PropertyRef Name="ProductTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vPlanLine__Produ__0F624AF8">
+          <End Role="cProductType" Type="Self.cProductType" Multiplicity="0..1" />
+          <End Role="vPlanLine" Type="Self.vPlanLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cProductType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vPlanLine">
+              <PropertyRef Name="ProductTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vPlanLine__Produ__1CBC4616">
+          <End Role="cProductType" Type="Self.cProductType" Multiplicity="0..1" />
+          <End Role="vPlanLineCopy" Type="Self.vPlanLineCopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cProductType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vPlanLineCopy">
+              <PropertyRef Name="ProductTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="cLine" EntityType="Self.cLine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cProductType" EntityType="Self.cProductType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vOrder" EntityType="Self.vOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vPlanLine" EntityType="Self.vPlanLine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vPlanLineCopy" EntityType="Self.vPlanLineCopy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cLineCopy" EntityType="Self.cLineCopy" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [cLineCopy].[Id] AS [Id], 
+    [cLineCopy].[Number] AS [Number], 
+    [cLineCopy].[OrderId] AS [OrderId], 
+    [cLineCopy].[ProductTypeId] AS [ProductTypeId]
+    FROM [dbo].[cLineCopy] AS [cLineCopy]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="cProductTypeCopy" EntityType="Self.cProductTypeCopy" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [cProductTypeCopy].[Id] AS [Id], 
+    [cProductTypeCopy].[Name] AS [Name], 
+    [cProductTypeCopy].[Price] AS [Price]
+    FROM [dbo].[cProductTypeCopy] AS [cProductTypeCopy]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vPlanLineCopy2" EntityType="Self.vPlanLineCopy2" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vPlanLineCopy2].[Id] AS [Id], 
+    [vPlanLineCopy2].[ReservedShipment] AS [ReservedShipment], 
+    [vPlanLineCopy2].[ShipmentBuyersOrders] AS [ShipmentBuyersOrders], 
+    [vPlanLineCopy2].[Production] AS [Production], 
+    [vPlanLineCopy2].[EstimatedStockBalance] AS [EstimatedStockBalance], 
+    [vPlanLineCopy2].[AvailablePromise] AS [AvailablePromise], 
+    [vPlanLineCopy2].[_Date] AS [_Date], 
+    [vPlanLineCopy2].[ProductTypeId] AS [ProductTypeId]
+    FROM [dbo].[vPlanLineCopy2] AS [vPlanLineCopy2]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__cLine__OrderId__0D7A0286" Association="Self.FK__cLine__OrderId__0D7A0286">
+            <End Role="vOrder" EntitySet="vOrder" />
+            <End Role="cLine" EntitySet="cLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cLine__ProductTy__0E6E26BF" Association="Self.FK__cLine__ProductTy__0E6E26BF">
+            <End Role="cProductType" EntitySet="cProductType" />
+            <End Role="cLine" EntitySet="cLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vPlanLine__Produ__0F624AF8" Association="Self.FK__vPlanLine__Produ__0F624AF8">
+            <End Role="cProductType" EntitySet="cProductType" />
+            <End Role="vPlanLine" EntitySet="vPlanLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vPlanLine__Produ__1CBC4616" Association="Self.FK__vPlanLine__Produ__1CBC4616">
+            <End Role="cProductType" EntitySet="cProductType" />
+            <End Role="vPlanLineCopy" EntitySet="vPlanLineCopy" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cLine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Number" Type="Int32" />
+          <Property Name="OrderId" Type="Int32" />
+          <Property Name="ProductTypeId" Type="Int32" />
+          <NavigationProperty Name="vOrder" Relationship="Self.FK__cLine__OrderId__0D7A0286" FromRole="cLine" ToRole="vOrder" />
+          <NavigationProperty Name="cProductType" Relationship="Self.FK__cLine__ProductTy__0E6E26BF" FromRole="cLine" ToRole="cProductType" />
+        </EntityType>
+        <EntityType Name="cProductType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="cLine" Relationship="Self.FK__cLine__ProductTy__0E6E26BF" FromRole="cProductType" ToRole="cLine" />
+          <NavigationProperty Name="vPlanLine" Relationship="Self.FK__vPlanLine__Produ__0F624AF8" FromRole="cProductType" ToRole="vPlanLine" />
+          <NavigationProperty Name="vPlanLineCopy" Relationship="Self.FK__vPlanLine__Produ__1CBC4616" FromRole="cProductType" ToRole="vPlanLineCopy" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="vOrder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Buyer" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="ShipmentDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="cLine" Relationship="Self.FK__cLine__OrderId__0D7A0286" FromRole="vOrder" ToRole="cLine" />
+        </EntityType>
+        <EntityType Name="vPlanLine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ReservedShipment" Type="Int32" />
+          <Property Name="ShipmentBuyersOrders" Type="Int32" />
+          <Property Name="Production" Type="Int32" />
+          <Property Name="EstimatedStockBalance" Type="Int32" />
+          <Property Name="AvailablePromise" Type="Int32" />
+          <Property Name="C_Date" Type="DateTime" Precision="0" />
+          <Property Name="ProductTypeId" Type="Int32" />
+          <NavigationProperty Name="cProductType" Relationship="Self.FK__vPlanLine__Produ__0F624AF8" FromRole="vPlanLine" ToRole="cProductType" />
+        </EntityType>
+        <EntityType Name="vPlanLineCopy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ReservedShipment" Type="Int32" />
+          <Property Name="ShipmentBuyersOrders" Type="Int32" />
+          <Property Name="Production" Type="Int32" />
+          <Property Name="EstimatedStockBalance" Type="Int32" />
+          <Property Name="AvailablePromise" Type="Int32" />
+          <Property Name="C_Date" Type="DateTime" Precision="0" />
+          <Property Name="ProductTypeId" Type="Int32" />
+          <NavigationProperty Name="cProductType" Relationship="Self.FK__vPlanLine__Produ__1CBC4616" FromRole="vPlanLineCopy" ToRole="cProductType" />
+        </EntityType>
+        <EntityType Name="cLineCopy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Number" Type="Int32" />
+          <Property Name="OrderId" Type="Int32" />
+          <Property Name="ProductTypeId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="cProductTypeCopy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="vPlanLineCopy2">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ReservedShipment" Type="Int32" />
+          <Property Name="ShipmentBuyersOrders" Type="Int32" />
+          <Property Name="Production" Type="Int32" />
+          <Property Name="EstimatedStockBalance" Type="Int32" />
+          <Property Name="AvailablePromise" Type="Int32" />
+          <Property Name="C_Date" Type="DateTime" Precision="0" />
+          <Property Name="ProductTypeId" Type="Int32" />
+        </EntityType>
+        <Association Name="FK__cLine__OrderId__0D7A0286">
+          <End Role="vOrder" Type="Self.vOrder" Multiplicity="0..1" />
+          <End Role="cLine" Type="Self.cLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vOrder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="cLine">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__cLine__ProductTy__0E6E26BF">
+          <End Role="cProductType" Type="Self.cProductType" Multiplicity="0..1" />
+          <End Role="cLine" Type="Self.cLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cProductType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="cLine">
+              <PropertyRef Name="ProductTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vPlanLine__Produ__0F624AF8">
+          <End Role="cProductType" Type="Self.cProductType" Multiplicity="0..1" />
+          <End Role="vPlanLine" Type="Self.vPlanLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cProductType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vPlanLine">
+              <PropertyRef Name="ProductTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vPlanLine__Produ__1CBC4616">
+          <End Role="cProductType" Type="Self.cProductType" Multiplicity="0..1" />
+          <End Role="vPlanLineCopy" Type="Self.vPlanLineCopy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cProductType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vPlanLineCopy">
+              <PropertyRef Name="ProductTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Курсова_роботаEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="cLine" EntityType="Self.cLine" />
+          <EntitySet Name="cProductType" EntityType="Self.cProductType" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="vOrder" EntityType="Self.vOrder" />
+          <EntitySet Name="vPlanLine" EntityType="Self.vPlanLine" />
+          <EntitySet Name="vPlanLineCopy" EntityType="Self.vPlanLineCopy" />
+          <EntitySet Name="cLineCopy" EntityType="Self.cLineCopy" />
+          <EntitySet Name="cProductTypeCopy" EntityType="Self.cProductTypeCopy" />
+          <EntitySet Name="vPlanLineCopy2" EntityType="Self.vPlanLineCopy2" />
+          <AssociationSet Name="FK__cLine__OrderId__0D7A0286" Association="Self.FK__cLine__OrderId__0D7A0286">
+            <End Role="vOrder" EntitySet="vOrder" />
+            <End Role="cLine" EntitySet="cLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK__cLine__ProductTy__0E6E26BF" Association="Self.FK__cLine__ProductTy__0E6E26BF">
+            <End Role="cProductType" EntitySet="cProductType" />
+            <End Role="cLine" EntitySet="cLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vPlanLine__Produ__0F624AF8" Association="Self.FK__vPlanLine__Produ__0F624AF8">
+            <End Role="cProductType" EntitySet="cProductType" />
+            <End Role="vPlanLine" EntitySet="vPlanLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vPlanLine__Produ__1CBC4616" Association="Self.FK__vPlanLine__Produ__1CBC4616">
+            <End Role="cProductType" EntitySet="cProductType" />
+            <End Role="vPlanLineCopy" EntitySet="vPlanLineCopy" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Курсова_роботаEntities">
+          <EntitySetMapping Name="cLine">
+            <EntityTypeMapping TypeName="Model.cLine">
+              <MappingFragment StoreEntitySet="cLine">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ProductTypeId" ColumnName="ProductTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cProductType">
+            <EntityTypeMapping TypeName="Model.cProductType">
+              <MappingFragment StoreEntitySet="cProductType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vOrder">
+            <EntityTypeMapping TypeName="Model.vOrder">
+              <MappingFragment StoreEntitySet="vOrder">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Buyer" ColumnName="Buyer" />
+                <ScalarProperty Name="ShipmentDate" ColumnName="ShipmentDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vPlanLine">
+            <EntityTypeMapping TypeName="Model.vPlanLine">
+              <MappingFragment StoreEntitySet="vPlanLine">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ReservedShipment" ColumnName="ReservedShipment" />
+                <ScalarProperty Name="ShipmentBuyersOrders" ColumnName="ShipmentBuyersOrders" />
+                <ScalarProperty Name="Production" ColumnName="Production" />
+                <ScalarProperty Name="EstimatedStockBalance" ColumnName="EstimatedStockBalance" />
+                <ScalarProperty Name="AvailablePromise" ColumnName="AvailablePromise" />
+                <ScalarProperty Name="C_Date" ColumnName="_Date" />
+                <ScalarProperty Name="ProductTypeId" ColumnName="ProductTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vPlanLineCopy">
+            <EntityTypeMapping TypeName="Model.vPlanLineCopy">
+              <MappingFragment StoreEntitySet="vPlanLineCopy">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ReservedShipment" ColumnName="ReservedShipment" />
+                <ScalarProperty Name="ShipmentBuyersOrders" ColumnName="ShipmentBuyersOrders" />
+                <ScalarProperty Name="Production" ColumnName="Production" />
+                <ScalarProperty Name="EstimatedStockBalance" ColumnName="EstimatedStockBalance" />
+                <ScalarProperty Name="AvailablePromise" ColumnName="AvailablePromise" />
+                <ScalarProperty Name="C_Date" ColumnName="_Date" />
+                <ScalarProperty Name="ProductTypeId" ColumnName="ProductTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cLineCopy">
+            <EntityTypeMapping TypeName="Model.cLineCopy">
+              <MappingFragment StoreEntitySet="cLineCopy">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ProductTypeId" ColumnName="ProductTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cProductTypeCopy">
+            <EntityTypeMapping TypeName="Model.cProductTypeCopy">
+              <MappingFragment StoreEntitySet="cProductTypeCopy">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vPlanLineCopy2">
+            <EntityTypeMapping TypeName="Model.vPlanLineCopy2">
+              <MappingFragment StoreEntitySet="vPlanLineCopy2">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ReservedShipment" ColumnName="ReservedShipment" />
+                <ScalarProperty Name="ShipmentBuyersOrders" ColumnName="ShipmentBuyersOrders" />
+                <ScalarProperty Name="Production" ColumnName="Production" />
+                <ScalarProperty Name="EstimatedStockBalance" ColumnName="EstimatedStockBalance" />
+                <ScalarProperty Name="AvailablePromise" ColumnName="AvailablePromise" />
+                <ScalarProperty Name="C_Date" ColumnName="_Date" />
+                <ScalarProperty Name="ProductTypeId" ColumnName="ProductTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
